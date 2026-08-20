@@ -31,34 +31,38 @@
         <hibernate-validator.version>5.4.3.Final</hibernate-validator.version>
 
         <!-- Database -->
-        <mysql-connector.version>5.1.49</mysql-connector.version>
+        <mysql-connector.version>8.0.33</mysql-connector.version>
 
-        <!-- Apache -->
-        <commons-dbcp.version>1.4</commons-dbcp.version>
-        <commons-fileupload.version>1.5</commons-fileupload.version>
-        <commons-io.version>2.15.1</commons-io.version>
+        <!-- Apache Commons -->
+        <commons-dbcp.version>2.9.0</commons-dbcp.version>
+        <commons-fileupload.version>2.0.0-M1</commons-fileupload.version>
+        <commons-io.version>2.20.0</commons-io.version>
 
         <!-- Logging -->
-        <logback.version>1.2.13</logback.version>
+        <logback.version>1.5.18</logback.version>
 
         <!-- Testing -->
         <junit.version>4.13.2</junit.version>
-        <mockito.version>2.28.2</mockito.version>
+        <mockito.version>5.18.0</mockito.version>
 
         <!-- Other -->
         <jstl.version>1.2</jstl.version>
-        <gson.version>2.10.1</gson.version>
+        <gson.version>2.13.1</gson.version>
+
+        <!-- Memcached -->
+        <spymemcached.version>2.12.3</spymemcached.version>
 
         <!-- RabbitMQ -->
         <spring-rabbit.version>1.7.6.RELEASE</spring-rabbit.version>
-        <rabbitmq-client.version>4.8.3</rabbitmq-client.version>
+        <rabbitmq-client.version>5.20.0</rabbitmq-client.version>
 
         <!-- Elasticsearch -->
         <elasticsearch.version>5.6.16</elasticsearch.version>
 
         <!-- Plugins -->
-        <jacoco.version>0.8.12</jacoco.version>
+        <jacoco.version>0.8.13</jacoco.version>
         <maven-war.version>3.4.0</maven-war.version>
+        <maven-compiler.version>3.13.0</maven-compiler.version>
 
     </properties>
 
@@ -119,8 +123,8 @@
         <!-- ================= MYSQL ================= -->
 
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
             <version>${mysql-connector.version}</version>
         </dependency>
 
@@ -128,13 +132,13 @@
         <!-- ================= DATABASE POOL ================= -->
 
         <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
             <version>${commons-dbcp.version}</version>
         </dependency>
 
 
-        <!-- ================= SERVLET / JSTL ================= -->
+        <!-- ================= SERVLET ================= -->
 
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -142,6 +146,9 @@
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
+
+
+        <!-- ================= JSTL ================= -->
 
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -194,7 +201,7 @@
 
         <dependency>
             <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
+            <artifactId>commons-fileupload2-jakarta-servlet6</artifactId>
             <version>${commons-fileupload.version}</version>
         </dependency>
 
@@ -210,7 +217,7 @@
         <dependency>
             <groupId>net.spy</groupId>
             <artifactId>spymemcached</artifactId>
-            <version>2.12.3</version>
+            <version>${spymemcached.version}</version>
         </dependency>
 
 
@@ -263,19 +270,22 @@
 
         <plugins>
 
-            <!-- Maven Compiler -->
+            <!-- ================= MAVEN COMPILER ================= -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
+                <version>${maven-compiler.version}</version>
+
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>
 
 
-            <!-- WAR -->
+            <!-- ================= WAR ================= -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -283,7 +293,8 @@
             </plugin>
 
 
-            <!-- Jetty -->
+            <!-- ================= JETTY ================= -->
+
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -313,6 +324,7 @@
 
                     <execution>
                         <id>prepare-agent</id>
+
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
@@ -320,7 +332,9 @@
 
                     <execution>
                         <id>report</id>
+
                         <phase>test</phase>
+
                         <goals>
                             <goal>report</goal>
                         </goals>
