@@ -35,26 +35,26 @@
 
         <!-- Apache Commons -->
         <commons-dbcp.version>2.9.0</commons-dbcp.version>
-        <commons-fileupload.version>2.0.0-M1</commons-fileupload.version>
+        <commons-fileupload.version>1.5</commons-fileupload.version>
         <commons-io.version>2.20.0</commons-io.version>
 
         <!-- Logging -->
-        <logback.version>1.5.18</logback.version>
+        <logback.version>1.2.13</logback.version>
 
         <!-- Testing -->
         <junit.version>4.13.2</junit.version>
-        <mockito.version>5.18.0</mockito.version>
+        <mockito.version>2.28.2</mockito.version>
 
         <!-- Other -->
         <jstl.version>1.2</jstl.version>
-        <gson.version>2.13.1</gson.version>
+        <gson.version>2.10.1</gson.version>
 
         <!-- Memcached -->
         <spymemcached.version>2.12.3</spymemcached.version>
 
         <!-- RabbitMQ -->
         <spring-rabbit.version>1.7.6.RELEASE</spring-rabbit.version>
-        <rabbitmq-client.version>5.20.0</rabbitmq-client.version>
+        <rabbitmq-client.version>4.8.3</rabbitmq-client.version>
 
         <!-- Elasticsearch -->
         <elasticsearch.version>5.6.16</elasticsearch.version>
@@ -201,7 +201,7 @@
 
         <dependency>
             <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload2-jakarta-servlet6</artifactId>
+            <artifactId>commons-fileupload</artifactId>
             <version>${commons-fileupload.version}</version>
         </dependency>
 
@@ -301,13 +301,11 @@
                 <version>9.4.57.v20241219</version>
 
                 <configuration>
-
                     <scanIntervalSeconds>10</scanIntervalSeconds>
 
                     <webApp>
                         <contextPath>/</contextPath>
                     </webApp>
-
                 </configuration>
 
             </plugin>
@@ -324,7 +322,6 @@
 
                     <execution>
                         <id>prepare-agent</id>
-
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
@@ -332,9 +329,7 @@
 
                     <execution>
                         <id>report</id>
-
                         <phase>test</phase>
-
                         <goals>
                             <goal>report</goal>
                         </goals>
